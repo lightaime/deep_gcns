@@ -6,7 +6,7 @@ In this work, we present new ways to successfully train very deep GCNs. We borro
 <div style="text-align:center"><img src='./misc/intro.png' width=800>
 
 ## Overview
-We do extensive experiments to how show different components (#Layers, #Filters, #Nearest Neighbors, Dilation, etc.) effect `DeepGCNs`. We also provide ablation studies on different type of Deep GCNs (MRGCN, EdgeConv, GraphSage and GIN).
+We do extensive experiments to show how different components (#Layers, #Filters, #Nearest Neighbors, Dilation, etc.) effect `DeepGCNs`. We also provide ablation studies on different type of Deep GCNs (MRGCN, EdgeConv, GraphSage and GIN).
 
 <div style="text-align:center"><img src='./misc/pipeline.png' width=800>
 
