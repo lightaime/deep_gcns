@@ -77,7 +77,7 @@ class Model(object):
 
     for i in range(num_layers):
       if i == 0:
-        neigh_idx = edge_layer_builder.build(input_graph[:, :, :, 6:], # to do
+        neigh_idx = edge_layer_builder.build(input_graph[:, :, :, 6:],
                                             dilation=dilations[i],
                                             is_training=self.is_training)
         vertex_features  = vertex_layer_builder.build(input_graph,
