@@ -3,6 +3,11 @@ import sys
 import numpy as np
 import h5py
 
+try:
+  xrange
+except NameError:
+  xrange = range
+
 def shuffle_data(data, labels):
   """ Shuffle data and labels.
     Input:
