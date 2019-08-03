@@ -70,9 +70,9 @@ class Model(object):
     '''Build the gcn backbone block'''
     input_graph = tf.expand_dims(input_graph, -2)
     graphs = []
-    if edge_layer_builder.layer.__name__ is 'knn_graph':
+    if edge_layer_builder.layer.__name__ == 'knn_graph':
       dilations = [None] * num_layers
-    elif edge_layer_builder.layer.__name__ is 'dilated_knn_graph':
+    elif edge_layer_builder.layer.__name__ == 'dilated_knn_graph':
       dilations = [1] + list(range(1, num_layers))
 
     for i in range(num_layers):
