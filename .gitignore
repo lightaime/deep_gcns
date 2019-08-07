@@ -1,0 +1,4 @@
+data/
+*.pyc
+sem_seg/meta/
+sem_seg/indoor3d_sem_seg_hdf5_data
