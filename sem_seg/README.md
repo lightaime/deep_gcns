@@ -6,7 +6,16 @@
 ```
 sh +x download_data.sh
 ```
-2. Download 3D indoor parsing dataset (<a href="http://buildingparser.stanford.edu/dataset.html">S3DIS Dataset</a>) for testing and visualization. "Stanford3dDataset_v1.2_Aligned_Version.zip" of the dataset is used. Unzip the downloaded file into "deep_gcns/data/", and then run
+2. Download 3D indoor parsing dataset (<a href="http://buildingparser.stanford.edu/dataset.html">S3DIS Dataset</a>) for testing and visualization. "Stanford3dDataset_v1.2_Aligned_Version.zip" of the dataset is used. Unzip the downloaded file into "deep_gcns/data" and merge with the folder `Stanford3dDataset_v1.2_Aligned_Version` which already contains the patches `S3DIS_PATCH.diff` and `DS_STORE_PATCH.diff` then run,
+
+```
+cd ../data/Stanford3dDataset_v1.2_Aligned_Version
+git apply S3DIS_PATCH.diff
+find . -name ".DS_Store" -delete
+```
+
+Next run,
+
 ```
 python collect_indoor3d_data.py
 ```
