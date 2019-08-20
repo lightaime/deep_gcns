@@ -49,4 +49,4 @@ Please cite our paper if you find anything helpful,
 MIT License
 
 ## Acknowledgement
-This code is heavily borrowed from [PointNet](https://github.com/charlesq34/pointnet) and [EdgeConv](https://github.com/WangYueFt/dgcnn).
+This code is heavily borrowed from [PointNet](https://github.com/charlesq34/pointnet) and [EdgeConv](https://github.com/WangYueFt/dgcnn). We would also like to thank [3d-semantic-segmentation](https://github.com/VisualComputingInstitute/3d-semantic-segmentation) for the visualization code.

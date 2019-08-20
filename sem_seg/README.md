@@ -14,7 +14,6 @@ git apply S3DIS_PATCH.diff
 find . -name ".DS_Store" -delete
 ```
 
-
 Thanks to (<a href="https://github.com/loicland/superpoint_graph">loicland</a>) for the fix.
 
 Next run,
