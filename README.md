@@ -16,7 +16,7 @@ Further information and details please contact [Guohao Li](https://ivul.kaust.ed
 * [TensorFlow 1.12.0](https://www.tensorflow.org/)
 * [h5py](https://www.h5py.org/)
 * [vtk](https://vtk.org/) (only needed for visualization)
-* [vtk](https://vtk.org/) (only needed for visualization)
+* [jupyter notebook](https://jupyter.org/) (only needed for visualization)
 
 ## Conda Environment
 In order to setup a conda environment with all neccessary dependencies run,

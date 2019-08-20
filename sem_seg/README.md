@@ -85,5 +85,7 @@ In order to compare several pretrained models visually you can follow these step
 sh +x visualize_pretrained.sh
 ```
 
-2. Open the Jupyter notebook "visualization.ipynb" and follow the steps in the notebook.
-
+2. Open the visualization notebook and follow the steps in the notebook.
+```
+jupyter notebook visualization.ipynb
+```
