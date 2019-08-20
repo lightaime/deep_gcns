@@ -15,6 +15,23 @@ Further information and details please contact [Guohao Li](https://ivul.kaust.ed
 ## Requirements
 * [TensorFlow 1.12.0](https://www.tensorflow.org/)
 * [h5py](https://www.h5py.org/)
+* [vtk](https://vtk.org/) (only needed for visualization)
+* [vtk](https://vtk.org/) (only needed for visualization)
+
+## Conda Environment
+In order to setup a conda environment with all neccessary dependencies run,
+```
+conda env create -f environment.yml
+```
+
+## Getting Started
+You will find detailed instructions how to use our code for semantic segmentation of 3D point clouds, in the folder [sem_seg](sem_seg/). Currently, we provide the following:
+* Conda environment
+* Setup of <a href="http://buildingparser.stanford.edu/dataset.html">S3DIS Dataset</a>
+* Training code
+* Evaluation code
+* Several pretrained models
+* Visualization code
 
 ## Citation
 Please cite our paper if you find anything helpful,

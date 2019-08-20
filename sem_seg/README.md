@@ -24,6 +24,7 @@ python collect_indoor3d_data.py
 ```
 to generate "deep_gcns/data/stanford_indoor3d"
 
+
 ### Train
 
 We use 6-fold training, such that 6 models are trained leaving 1 of 6 areas as the testing area for each model. We keep using 2 GPUs for distributed training. To train 6 models sequentially, run
@@ -75,4 +76,15 @@ If you want to evaluate one of these models:
 ```
 sh +x test_pretrained.sh
 ```
+
+#### Visualization
+
+In order to compare several pretrained models visually you can follow these steps:
+
+1. To generate the predicted results including files for visualization, run
+```
+sh +x visualize_pretrained.sh
+```
+
+2. Open the Jupyter notebook "visualization.ipynb" and follow the steps in the notebook.
 
