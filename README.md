@@ -36,8 +36,8 @@ You will find detailed instructions how to use our code for semantic segmentatio
 ## Citation
 Please cite our paper if you find anything helpful,
 
-	@misc{li2019gcns,
-	    title={Can GCNs Go as Deep as CNNs?},
+	@misc{li2019deepgcns,
+	    title={DeepGCNs: Can GCNs Go as Deep as CNNs?},
 	    author={Guohao Li and Matthias Müller and Ali Thabet and Bernard Ghanem},
 	    year={2019},
 	    eprint={1904.03751},
