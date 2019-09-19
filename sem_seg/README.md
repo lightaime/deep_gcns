@@ -65,7 +65,17 @@ python eval_iou_accuracy.py --folder $MODEL --area 5
 
 #### Pretrained Models
 
-Several pretrained models (ResGCN-56, ResGCN-28W, ResGCN-28, PlainGCN-28) are available in the folder "pretrained".
+Several pretrained models (ResGCN-56, ResGCN-28W, ResGCN-28, DenseGCN-28, PlainGCN-28) can be downloaded:
+
+1. To install gdown which is required to download the pretrained models, run
+```
+pip install gdown
+```
+
+2. To download the pretrained models and put them into the folder "pretrained", run
+```
+sh download_pretrained_models.sh
+```
 
 If you want to evaluate one of these models:
 

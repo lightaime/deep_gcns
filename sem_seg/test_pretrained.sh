@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-MODEL="pretrained/ResGCN-28" #ResGCN-56, ResGCN-28W, ResGCN-28, PlainGCN-28
+MODEL="pretrained/ResGCN-28" #ResGCN-56, ResGCN-28W, ResGCN-28, DenseGCN-28, PlainGCN-28
 EPNUM="best"
 
 echo "\nProcessing Model $MODEL \n"
