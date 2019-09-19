@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+'''
+  Project:
+    Can GCNs Go as Deep as CNNs?
+    https://sites.google.com/view/deep-gcns
+    http://arxiv.org/abs/1904.03751
+  Author:
+    Guohao Li, Matthias Müller, Ali K. Thabet and Bernard Ghanem.
+    King Abdullah University of Science and Technology.
+'''
 import os
 import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -47,6 +57,7 @@ train_path = MODEL_PATH.split('/epoch')[0]
 with open(train_path + '/log_train.txt') as f:
   first_line = f.readline()
   PARAMS = eval('argparse.'+first_line)
+print(PARAMS)
 
 # Network Settings
 MODEL_FILE = PARAMS.model
@@ -54,14 +65,32 @@ NUM_LAYERS = PARAMS.num_layers
 NUM_CLASSES = PARAMS.num_classes
 
 # GCN parameters
-K = PARAMS.k
+NUM_NEIGHBORS = PARAMS.num_neighbors
+if (len(NUM_NEIGHBORS) < NUM_LAYERS):
+    while (len(NUM_NEIGHBORS) < NUM_LAYERS):
+        NUM_NEIGHBORS.append(NUM_NEIGHBORS[-1]) 
+
+NUM_FILTERS = PARAMS.num_filters
+if (len(NUM_FILTERS) < NUM_LAYERS):
+    while (len(NUM_FILTERS) < NUM_LAYERS):
+        NUM_FILTERS.append(NUM_FILTERS[-1]) 
+
+DILATIONS = PARAMS.dilations
+if DILATIONS[0] < 0:
+    DILATIONS = [1] + list(range(1, NUM_LAYERS))
+elif (len(DILATIONS) < NUM_LAYERS):
+    while (len(DILATIONS) < NUM_LAYERS):
+        DILATIONS.extend(DILATIONS) 
+    while (len(DILATIONS) > NUM_LAYERS):
+        DILATIONS.pop() 
+
 STOCHASTIC_DILATION = PARAMS.stochastic_dilation
 STO_DILATED_EPSILON = PARAMS.sto_dilated_epsilon
 SKIP_CONNECT = PARAMS.skip_connect
 EDGE_LAY = PARAMS.edge_lay
-GCN_NUM_FILTERS = PARAMS.gcn_num_filters
-GCN = PARAMS.gcn
 
+
+GCN = PARAMS.gcn
 if GCN == "mrgcn":
   print("Using max relative gcn")
 elif GCN == 'edgeconv':
@@ -112,9 +141,7 @@ def evaluate():
     else:
       raise Exception("Unknown gcn type")
     v_layer_builder = VertexLayer(v_layer,
-                                  nn,
-                                  K,
-                                  GCN_NUM_FILTERS)
+                                  nn)
 
     # Configure the gcn edge layer object
     if EDGE_LAY == 'dilated':
@@ -124,22 +151,24 @@ def evaluate():
     elif EDGE_LAY == 'knn':
       e_layer = tf_edge.knn_graph
     else:
-      raise Exception("Unknown edge laer type")
+      raise Exception("Unknown edge layer type")
     distance_metric = tf_util.pairwise_distance
 
     e_layer_builder = EdgeLayer(e_layer,
-                                K,
                                 distance_metric)
 
     # Get the whole model builer
     model_obj = model_builder.Model(BATCH_SIZE,
                                     NUM_POINTS,
                                     NUM_LAYERS,
+                                    NUM_NEIGHBORS,
+                                    NUM_FILTERS,
                                     NUM_CLASSES,
                                     vertex_layer_builder=v_layer_builder,
                                     edge_layer_builder=e_layer_builder,
                                     mlp_builder=nn,
-                                    skip_connect=SKIP_CONNECT)
+                                    skip_connect=SKIP_CONNECT,
+                                    dilations=DILATIONS)
 
     inputs_ph = model_obj.inputs
     labels_ph = model_obj.labels

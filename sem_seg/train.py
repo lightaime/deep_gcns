@@ -69,12 +69,31 @@ BN_DECAY_DECAY_STEP = FLAGS.bn_decay_decay_step
 BN_DECAY_CLIP = FLAGS.bn_decay_clip
 
 # GCN parameters
-K = FLAGS.k
+NUM_NEIGHBORS = FLAGS.num_neighbors
+if (len(NUM_NEIGHBORS) < NUM_LAYERS):
+    while (len(NUM_NEIGHBORS) < NUM_LAYERS):
+        NUM_NEIGHBORS.append(NUM_NEIGHBORS[-1]) 
+
+NUM_FILTERS = FLAGS.num_filters
+if (len(NUM_FILTERS) < NUM_LAYERS):
+    while (len(NUM_FILTERS) < NUM_LAYERS):
+        NUM_FILTERS.append(NUM_FILTERS[-1]) 
+
+DILATIONS = FLAGS.dilations
+if DILATIONS[0] < 0:
+    DILATIONS = [1] + list(range(1, NUM_LAYERS))
+elif (len(DILATIONS) < NUM_LAYERS):
+    while (len(DILATIONS) < NUM_LAYERS):
+        DILATIONS.extend(DILATIONS) 
+    while (len(DILATIONS) > NUM_LAYERS):
+        DILATIONS.pop() 
+
 STOCHASTIC_DILATION = FLAGS.stochastic_dilation
 STO_DILATED_EPSILON = FLAGS.sto_dilated_epsilon
 SKIP_CONNECT = FLAGS.skip_connect
 EDGE_LAY = FLAGS.edge_lay
-GCN_NUM_FILTERS = FLAGS.gcn_num_filters
+
+
 GCN = FLAGS.gcn
 
 if GCN == "mrgcn":
@@ -86,7 +105,7 @@ elif GCN == 'graphsage':
   print("Using graphsage with normalize={}".format(NORMALIZE_SAGE))
 elif GCN == 'gin':
   ZERO_EPSILON_GIN = FLAGS.zero_epsilon_gin
-  print("Using gin with zere epsilon={}".format(ZERO_EPSILON_GIN))
+  print("Using gin with zero epsilon={}".format(ZERO_EPSILON_GIN))
 else:
   raise Exception("Unknow gcn")
 
@@ -173,9 +192,7 @@ def train():
             else:
               raise Exception("Unknown gcn type")
             v_layer_builder = VertexLayer(v_layer,
-                                          nn,
-                                          K,
-                                          GCN_NUM_FILTERS)
+                                          nn)
 
             # Configure the gcn edge layer object
             if EDGE_LAY == 'dilated':
@@ -185,22 +202,24 @@ def train():
             elif EDGE_LAY == 'knn':
               e_layer = tf_edge.knn_graph
             else:
-              raise Exception("Unknown edge laer type")
+              raise Exception("Unknown edge layer type")
             distance_metric = tf_util.pairwise_distance
 
             e_layer_builder = EdgeLayer(e_layer,
-                                        K,
                                         distance_metric)
 
             # Get the whole model builer
             model_obj = model_builder.Model(BATCH_SIZE,
                                             NUM_POINTS,
                                             NUM_LAYERS,
+                                            NUM_NEIGHBORS,
+                                            NUM_FILTERS,
                                             NUM_CLASSES,
                                             vertex_layer_builder=v_layer_builder,
                                             edge_layer_builder=e_layer_builder,
                                             mlp_builder=nn,
-                                            skip_connect=SKIP_CONNECT)
+                                            skip_connect=SKIP_CONNECT,
+                                            dilations=DILATIONS)
 
             inputs_ph = model_obj.inputs
             labels_ph = model_obj.labels
