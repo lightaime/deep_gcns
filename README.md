@@ -35,15 +35,15 @@ You will find detailed instructions how to use our code for semantic segmentatio
 
 ## Citation
 Please cite our paper if you find anything helpful,
+```
+@InProceedings{li2019deepgcns,
+    title={DeepGCNs: Can GCNs Go as Deep as CNNs?},
+    author={Guohao Li and Matthias Müller and Ali Thabet and Bernard Ghanem},
+    booktitle={The IEEE International Conference on Computer Vision (ICCV)},
+    year={2019}
+}
+```
 
-	@misc{li2019deepgcns,
-	    title={DeepGCNs: Can GCNs Go as Deep as CNNs?},
-	    author={Guohao Li and Matthias Müller and Ali Thabet and Bernard Ghanem},
-	    year={2019},
-	    eprint={1904.03751},
-	    archivePrefix={arXiv},
-	    primaryClass={cs.CV}
-	}
 
 ## License
 MIT License
