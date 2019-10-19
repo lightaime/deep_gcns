@@ -52,6 +52,7 @@ Please cite our paper if you find anything helpful,
     eprint={1910.06849},
     archivePrefix={arXiv},
     primaryClass={cs.CV}
+}
 ```
 
 ## License
