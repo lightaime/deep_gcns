@@ -23,6 +23,12 @@ python collect_indoor3d_data.py
 ```
 to generate "deep_gcns/data/stanford_indoor3d"
 
+To generated your own HDF5 files, run,
+
+```
+python gen_indoor3d_h5.py
+```
+
 
 ### Train
 
